@@ -1,0 +1,8 @@
+site_name: "customer"
+site_description: "This is a service to handle customers."
+
+nav:
+  - Introduction: index.md
+
+plugins:
+  - techdocs-core

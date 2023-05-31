@@ -1,0 +1,22 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: "customer"
+  description: "This is a service to handle customers."
+  links:
+    - url: https://api-customer-demobackstage1.empcbr.thoughtworks-labs.net/swagger
+      title: customer
+      icon: dashboard
+  annotations:
+    circleci.com/project-slug: github/platform-dx/customer-a177672
+    backstage.io/techdocs-ref: dir:.
+    github.com/project-slug:  platform-dx/customer-a177672
+    sonarqube.org/project-key: "customer"
+    backstage.io/kubernetes-label-selector: "app=customer"
+    backstage.io/adr-location: docs/adrs/
+spec:
+  type: service
+  lifecycle: experimental
+  owner: "guest"
+  providesApis:
+    - "customer"

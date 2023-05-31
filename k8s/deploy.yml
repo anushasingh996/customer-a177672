@@ -1,0 +1,65 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: customer-ingress
+  labels:
+    app: customer
+    backstage.io/kubernetes-id: customer 
+spec:
+  rules:
+    - host: api-customer-demobackstage1.empcbr.thoughtworks-labs.net
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: customer
+                port: 
+                  number: 80
+  tls:
+  - hosts:
+    - api-customer-demobackstage1.empcbr.thoughtworks-labs.net
+    secretName: letencryptkey
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: customer
+  labels:
+    app: customer
+    backstage.io/kubernetes-id: customer
+spec:
+  ports:
+  - port: 80
+    targetPort: 5000
+  selector:
+    app: customer
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: customer
+  labels:
+    app: customer
+    backstage.io/kubernetes-id: customer
+spec:
+  replicas: 2
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 5
+      maxUnavailable: 0
+  selector:
+    matchLabels:
+      app: customer
+  template:
+    metadata:
+      labels:
+        app: customer
+    spec:
+      containers:
+      - name: customer
+        image: 626109959667.dkr.ecr.us-east-1.amazonaws.com/customer:{image-tag}
+        ports:
+        - containerPort: 5000
