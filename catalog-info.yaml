@@ -20,4 +20,4 @@ spec:
   owner: "customer-team"
   providesApis:
     - "customer"
-  system: "order"  
+  system: "sales"  
