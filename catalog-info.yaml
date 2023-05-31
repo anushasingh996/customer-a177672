@@ -16,7 +16,7 @@ metadata:
     backstage.io/adr-location: docs/adrs/
 spec:
   type: service
-  lifecycle: experimental
-  owner: "guest"
+  lifecycle: deprecated
+  owner: "customer-team"
   providesApis:
     - "customer"
